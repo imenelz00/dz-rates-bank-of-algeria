@@ -6,8 +6,8 @@ import runpy
 import sys
 from pathlib import Path
 
-os.environ.setdefault("BOA_PERMISSION_GRANTED", "1")  # you hold the bank's agreement
-os.environ.setdefault("BOA_INSECURE_TLS", "1")        # the bank's server sends an incomplete certificate chain
+os.environ.setdefault("BOA_PERMISSION_GRANTED", "1")  
+os.environ.setdefault("BOA_INSECURE_TLS", "1")        
 os.environ["SOURCE_MODE"] = "live"
 os.environ.setdefault("DATABASE_URL", f"sqlite:///{Path(__file__).resolve().parent / 'data' / 'rates_live.db'}")  # keeps real data apart from demo data
 
