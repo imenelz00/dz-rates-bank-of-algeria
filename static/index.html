@@ -1,0 +1,127 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>DZD Exchange Rates</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<div id="demoStrip" class="strip" hidden>Demo mode: daily values are generated, not published by the Bank of Algeria.</div>
+
+<header class="top">
+  <div class="wrap bar">
+    <div class="brand"><h1>DZD Exchange Rates</h1><span>Source: Bank of Algeria</span></div>
+    <div id="syncSummary" class="sync-summary"></div>
+  </div>
+  <nav class="wrap tabs" aria-label="Sections">
+    <a href="#overview" data-tab="overview">Overview</a>
+    <a href="#history" data-tab="history">History</a>
+    <a href="#sync" data-tab="sync">Synchronization</a>
+  </nav>
+</header>
+
+<main class="wrap">
+  <div id="alertBar" class="alert" role="alert" hidden></div>
+
+  <!-- OVERVIEW -->
+  <section data-panel="overview">
+    <h2>Latest rates</h2>
+    <div class="table-wrap">
+      <table id="latest">
+        <thead><tr>
+          <th>Currency</th><th class="num">Reference</th><th class="num">Purchase (Achat)</th><th class="num">Selling (Vente)</th>
+          <th>Reference date</th><th>Quotation date</th><th>Value date</th>
+        </tr></thead>
+        <tbody></tbody>
+      </table>
+    </div>
+    <p id="latestNote" class="note"></p>
+
+    <div class="sec-head">
+      <h2>Daily evolution</h2>
+      <div class="range" role="group" aria-label="Chart date range">
+        <button class="seg" data-range="30">1M</button>
+        <button class="seg" data-range="90">3M</button>
+        <button class="seg active" data-range="365">1Y</button>
+        <button class="seg" data-range="1095">3Y</button>
+        <button class="seg" data-range="all">All</button>
+        <label class="date-in">From <input type="date" id="chFrom"></label>
+        <label class="date-in">To <input type="date" id="chTo"></label>
+      </div>
+    </div>
+    <div id="charts" class="charts"></div>
+    <p id="sparseNote" class="note" hidden></p>
+    <p class="note">Gaps are weekends (Friday–Saturday) and holidays: no rate is published, so none is drawn.</p>
+
+    <div class="sec-head"><h2>Annual series</h2></div>
+    <p class="note first">Imported from the Bank of Algeria annual workbooks: one value per year found</p>
+    <div id="annualCharts" class="charts"></div>
+  </section>
+
+  <!-- HISTORY -->
+  <section data-panel="history" hidden>
+    <div class="filters">
+      <label>Data
+        <select id="fData"></select></label>
+      <label>Currency
+        <select id="fCur"><option value="">All</option></select></label>
+      <label>Rate type
+        <select id="fType"></select></label>
+      <label>From <input type="date" id="fFrom"></label>
+      <label>To <input type="date" id="fTo"></label>
+      <button id="fReset" class="btn">Reset</button>
+      <span class="spacer"></span>
+      <a id="expCsv" class="btn" href="#">Export CSV</a>
+      <a id="expXlsx" class="btn" href="#">Export Excel</a>
+    </div>
+    <div class="table-wrap">
+      <table id="histTable">
+        <thead><tr>
+          <th>Currency</th><th>Rate type</th><th class="num">Rate (DZD)</th>
+          <th><button id="sortBtn" class="th-btn" aria-label="Sort by publication date">Publication date <span id="sortArrow">↓</span></button></th>
+          <th>Value date</th><th>Retrieved (UTC)</th><th>Source</th>
+        </tr></thead>
+        <tbody></tbody>
+      </table>
+    </div>
+    <div class="pager">
+      <span id="pageInfo" class="muted"></span>
+      <span class="spacer"></span>
+      <button id="prevBtn" class="btn">Previous</button>
+      <button id="nextBtn" class="btn">Next</button>
+    </div>
+  </section>
+
+  <!-- SYNCHRONIZATION -->
+  <section data-panel="sync" hidden>
+    <div class="sec-head">
+      <h2>Status</h2>
+      <button id="syncBtn" class="btn primary">Sync now</button>
+    </div>
+    <dl id="facts" class="facts"></dl>
+
+    <div class="sec-head"><h2>Stored data</h2></div>
+    <div class="table-wrap">
+      <table id="coverage">
+        <thead><tr><th>Rate type</th><th>Source</th><th>From</th><th>To</th><th class="num">Records</th></tr></thead>
+        <tbody></tbody>
+      </table>
+    </div>
+
+    <div class="sec-head"><h2>Synchronization log</h2></div>
+    <div class="table-wrap">
+      <table id="logTable">
+        <thead><tr><th>#</th><th>Trigger</th><th>Started (UTC)</th><th>Duration</th><th>Status</th>
+          <th class="num">Found</th><th class="num">New</th><th class="num">Updated</th><th></th></tr></thead>
+        <tbody></tbody>
+      </table>
+    </div>
+    <p class="note">Select a row to see the result for each source and currency.</p>
+  </section>
+</main>
+
+<script src="vendor/chart.umd.js"></script>
+<script src="app.js"></script>
+</body>
+</html>

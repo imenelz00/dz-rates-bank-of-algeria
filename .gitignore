@@ -1,0 +1,7 @@
+.venv/
+__pycache__/
+.pytest_cache/
+data/*.db
+data/probe/
+data/ca-bundle.pem
+*.zip
