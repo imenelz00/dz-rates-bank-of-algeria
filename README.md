@@ -32,7 +32,7 @@ The original brief said PostgreSQL. I used SQLite so the project runs without in
 I used WSL (Ubuntu) with VS Code, so the commands are for Linux. You need Python 3.10 or newer.
 
 ```bash
-git clone <this repository>
+git clone https://github.com/imenelz00/dz-rates-bank-of-algeria.git
 cd boa-rates
 python3 -m venv .venv
 source .venv/bin/activate
@@ -84,7 +84,7 @@ app/
   main.py          API endpoints and the web server
   sync.py          daily sync and the historical import
   ingest.py        validation, saving, duplicates, corrections
-  scheduler.py     automatic sync (startup and every hour)
+  scheduler.py     does the syncing
   annual_import.py reads the two Excel files
   models.py        database tables
   sources/         the bank readers (page, PDF) and the test data generator
